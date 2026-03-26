@@ -18,6 +18,12 @@ A command-line tool for fetching weather data from the [Hong Kong Observatory (å
 ## Installation
 
 ```bash
+npm install -g hko-cli
+```
+
+Or, if you prefer to run from source:
+
+```bash
 # Clone or download the project, then:
 cd hko-cli
 npm install
