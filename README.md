@@ -210,4 +210,4 @@ hko-cli/
 
 ## License
 
-ISC
+MIT
