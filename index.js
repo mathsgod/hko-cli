@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import { fetchWeather, printForecast } from "./src/weather/index.js";
+import { fetchWeather, printForecast, fetchLocal, printLocal } from "./src/weather/index.js";
 
 program
   .name("hko")
@@ -11,7 +11,7 @@ program
 program
   .command("weather")
   .description("Show 9-day weather forecast")
-  .option("-l, --lang <lang>", "Language: en or tc", "en")
+  .option("-l, --lang <lang>", "Language: en, tc or sc", "en")
   .option("-j, --json", "Output raw JSON")
   .action(async (opts) => {
     try {
@@ -23,6 +23,25 @@ program
       }
     } catch (err) {
       console.error("❌ Failed to fetch forecast:", err.message);
+      process.exit(1);
+    }
+  });
+
+program
+  .command("local")
+  .description("Show local weather forecast")
+  .option("-l, --lang <lang>", "Language: en, tc or sc", "en")
+  .option("-j, --json", "Output raw JSON")
+  .action(async (opts) => {
+    try {
+      const data = await fetchLocal(opts.lang);
+      if (opts.json) {
+        console.log(JSON.stringify(data, null, 2));
+      } else {
+        printLocal(data);
+      }
+    } catch (err) {
+      console.error("❌ Failed to fetch local forecast:", err.message);
       process.exit(1);
     }
   });
