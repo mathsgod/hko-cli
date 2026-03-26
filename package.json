@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "description": "Hong Kong Observatory CLI",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/bundle.cjs",
   "bin": {
-    "hko": "index.js"
+    "hko": "dist/bundle.cjs"
   },
+  "files": [
+    "dist/bundle.cjs"
+  ],
   "scripts": {
+    "build": "esbuild index.js --bundle --platform=node --format=cjs --outfile=dist/bundle.cjs",
+    "prepublishOnly": "npm run build",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -22,6 +27,7 @@
     "commander": "^14.0.3"
   },
   "devDependencies": {
+    "esbuild": "^0.27.4",
     "vitest": "^4.1.1"
   }
 }
